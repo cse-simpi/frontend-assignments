@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        td {
+            padding: 10px;
+            background-color: black;
+        }
+
+        .container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        img{
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            border: 2px solid red;
+        }
+        th{
+            background-color: rgb(76, 124, 171);
+            padding: 20px;
+        }
+
+        h1{
+            background-color: rgb(23, 23, 61);
+            padding: 20px;
+            width: 100vw;color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .parent-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        audio{
+            display: block;
+            width: 35vw;
+        }
+        table{
+            border-collapse: collapse;
+        
+        }
+        tr{
+            border: 1px solid white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent-container">
+    <h1>Music App</h1>
+
+    <table>
+        <tr>
+            <th rowspan="4">
+                <div class="container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJUhKRLGwTNsnrejbf0xhvsf86M-Ekq_AfIs6gHcJzDRu7vh6F"
+                        alt="">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJUhKRLGwTNsnrejbf0xhvsf86M-Ekq_AfIs6gHcJzDRu7vh6F"
+                        alt="">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJUhKRLGwTNsnrejbf0xhvsf86M-Ekq_AfIs6gHcJzDRu7vh6F"
+                        alt="">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJUhKRLGwTNsnrejbf0xhvsf86M-Ekq_AfIs6gHcJzDRu7vh6F"
+                        alt="">
+                </div>
+            </th>
+            <td><audio src="./assets/audio.mp3" controls></audio></td>
+        </tr>
+        <tr>
+            <td><audio src="./assets/audio.mp3" controls></audio></td>
+        </tr>
+        <tr>
+            <td><audio src="./assets/audio.mp3" controls></audio></td>
+        </tr>
+        <tr>
+            <td><audio src="./assets/audio.mp3" controls></audio></td>
+        </tr>
+    </table>
+    </div>
+</body>
+
+</html>
