@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       table{
+        border: 2px solid black;
+        background-color: rgb(207, 242, 227);
+       
+        border-radius: 20px;
+        border-spacing: 20px;
+       }
+       th,td{
+        border: 3px solid white;
+        color: red;
+        padding: 20px;
+        border-radius: 20px;
+        background-color: bisque;
+       }
+    </style>
+</head>
+<body>
+    <table border = "2">
+        <tr>
+            <th>Header</th>
+            <th>Header</th>
+            <th colspan = "2">Header</th>
+            <th>Header</th>
+        </tr>
+        <tr>
+            <td rowspan = "4">span</td>
+            <td colspan="4"> span columns</td>
+        </tr>
+        <tr>
+            <td colspan ="3">span columns</td>
+            <td rowspan = "3"> header</td>
+        </tr>
+        <tr>
+            <td rowspan = "2"> header</td>
+            <td colspan = "2">span column</td>
+            
+        </tr>
+        <tr>
+            <td rowspan = "2" colspan ="2">span both</td>
+        </tr>
+    </table>
+</body>
+</html>

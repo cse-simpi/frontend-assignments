@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+         
+        }
+
+        .form {
+
+            border: 2px solid white;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 5px;
+            background-color:rgb(166, 166, 240);
+            box-shadow: 2px 2px blue;
+        }
+
+    
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input{
+            background-color: white;
+            border-radius: 6px;
+            border : none;
+            padding: 5px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <legend>Job Application</legend>
+        <form action="" class="form">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" required>
+            <br>
+            <br>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
+            <br>
+            <br>
+            <label for="contact">Contact no</label>
+            <input type="tel" name="contact" id="contact" minlength="10" maxlength="10">
+            <br>
+            <br>
+            <label for="gender">Gender: </label>
+            <label for="male">Male</label>
+            <input type="radio" id="male" name="gender">
+            <label for="female">Female</label>
+            <input type="radio" id="female" name="gender">
+            <br>
+            <br>
+            <label for="">Skills</label>
+            <label for="html">HTML</label>
+            <input type="checkbox" name="html" id="html" checked>
+            <label for="css">CSS</label>
+            <input type="checkbox" name="css" id="css" checked>
+            <label for="js">JavaScript</label>
+            <input type="checkbox" name="js" id="js" checked>
+            <label for="react">React</label>
+            <input type="checkbox" name="react" id="react">
+            <br>
+            <br>
+            <label for="resume">Resume</label>
+            <input type="file" id="resume" accept=".pdf">
+            <br>
+            <br>
+            <label for="doj">DOJ</label>
+            <input type="date" id="doj" min="2026-05-01" max="2026-05-15">
+            <br>
+            <br>
+            <label for="branch">Branch</label>
+            <select name="" id="">
+                <option value="cse">CSE</option>
+                <option value="civil">Civil</option>
+                <option value="ece">ECE</option>
+            </select>
+            <br>
+            <br>
+            <label for="department">Department</label>
+            <select name="" id="">
+                <optgroup label="Management">
+                    <option value="bba">BBA</option>
+                    <option value="mba">MBA</option>
+                </optgroup>
+                <optgroup label="Engineering">
+                    <option value="diploma">Diploma</option>
+                    <option value="btech">Btech</option>
+                    <option value="mtech">Mtech</option>
+                </optgroup>
+            </select>
+            <br>
+            <br>
+            <details open>
+                <summary>Upcoming Drives...</summary>
+                <p>TCS</p>
+                <p>Google</p>
+                <p>Capgemini</p>
+            </details><br><br>
+            <label for = "experience">Experience</label>
+            <input type = "range" step = "50">
+            <br>
+            <br>
+            <label for ="time-slot"> Time Slot</label>
+            <input type = "time">
+            <br><br>
+            <label for="color">Color</label>
+            <input type="color" id ="color">
+            <br><br>
+            <label for = "address">Address</label>
+            <textarea id = "address"></textarea>
+            <br><br>
+            <label for = "fees">Fess:</label>
+            <input type = "text" value ="2000" readonly>
+            <br><br>
+            <input type="reset">
+            <input type="Submit" value ="Send">
+        </form>
+    </div>
+</body>
+
+</html>
