@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .details-img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .menu-img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .labels {
+            display: inline-block;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <mark>
+        <img class="details-img" src="./assets/pizza.svg" alt="pizza">
+        Pizza mania
+        
+        <img class ="details-img" src="./assets/pizza.svg" alt="pizza">
+        </mark>
+    </h1>
+    <fieldset>
+
+    <legend>
+        <h1>
+         <img class="details-img" src="./assets/pizza.svg" alt="pizza">
+         Pizza Order Here
+        
+        
+        <img class ="details-img" src="./assets/pizza.svg" alt="pizza">
+        </h1>
+    </legend>
+    <form action="">
+        <label for="firstName" class = "labels">First Name:</label>
+        <input type="text" id="firstName" placeholder="First Name" required>
+        <br><br>
+        <label for="lastName" class = "labels">Last Name:</label>
+        <input type="text" id="lastName" placeholder="Last Name" required>
+        <br><br>
+        <label for="email" class = "labels">Email:</label>
+        <input type="email" id="email" placeholder="abc@example.com" required>
+        <br><br>
+        <label for="contact" class = "labels">Contact:</label>
+        <input type="tel" minlength="10" maxlength="10" placeholder="Ex-8989898989" required>
+        <br><br>
+        <label for="delivereyDate" class = "labels">Preferred Delivery Date:</label>
+        <input type="date" id="delivereyDate" required>
+        <br><br>
+        <label for="size"class = "labels">Size:</label>
+        <br>
+        <label for="small">Small</label>
+        <input type="radio" name="size" required>
+        <label for="medium">Medium</label>
+        <input type="radio" name="size" required>
+        <label for="large">Large</label>
+        <input type="radio" name="size" required>
+        <br><br>
+        <label for="outlet"class = "labels">Outlet:</label>
+        <select name="" id="">
+            <option value="" selected hidden disabled>Select Outlet</option>
+            <option value="">abc</option>
+            <option value="">xyz</option>
+        </select>
+        <details open >
+            <summary>Menu</summary>
+            <div>
+                <img class="menu-img"
+                    src="https://www.shutterstock.com/image-vector/whole-hawaiian-pizza-sliced-loaded-260nw-2656029285.jpg"
+                    alt="Hawaiian">
+                <input type="checkbox" id="hawaiian">
+                <label for="Hawaiian">Hawaiian(150.00 ₹ <strike>₹ 170.00</strike>)</label>
+                <select name="" id="">
+                    <option value="" selected>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                </select>
+            </div>
+            <div>
+                <img class="menu-img"
+                    src="https://png.pngtree.com/png-clipart/20240117/original/pngtree-a-pepperoni-pizza-clip-art-png-image_14126788.png"
+                    alt="Pepperoni">
+                <input type="checkbox" id="pepperoni">
+                <label for="pepperoni">Pepperoni(140.00 ₹ <strike>₹ 160.00</strike>)</label>
+                <select name="" id="">
+                    <option value="" selected>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                </select>
+            </div>
+            <div>
+                <img class="menu-img"
+                    src="https://png.pngtree.com/png-clipart/20250106/original/pngtree-pizza-clipart-png-image_19715282.png"
+                    alt="Vegetable">
+                <input type="checkbox" id="vegetable">
+                <label for="vegetable">Vegetable(130.00 ₹ <strike>₹ 150.00</strike>)</label>
+                <select name="" id="">
+                    <option value="" selected>1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                </select>
+            </div>
+        </details>
+        <br><br>
+        <details open>
+            <summary>Extra Details</summary>
+            <div class="details">
+                <img class="details-img" src="./assets/creditCard.svg" alt="credit card">
+                <label for="creditCard">Credit Card:</label>
+                <input type="tel" id="creditCard">
+                <button>Verify Card</button>
+            </div>
+            <div class="details">
+                <img class="details-img" src="./assets/pin.svg" alt="pin">
+                <label for="pin">Pin:</label>
+                <input type="tel" id="pin" maxlength="6" minlength="6">
+            </div>
+            <div class="details">
+                <img class="details-img" src="./assets/gallery.svg" alt="photo">
+                <label for="photo"><mark><u><i>Upload photo for discount:</i></u></mark></label>
+                <input type="file" id="photo">
+            </div>
+            <div class="details">
+                <img class="details-img" src="./assets/notes.svg" alt="note">
+                <label for="additionalNote"><mark><u><i>Additional Note:</i></u></mark></label>
+                <textarea name="" id="additionalNote"
+                    placeholder="If any additional Requirement There Please Mention here."></textarea>
+            </div>
+            <div class="details">
+                <img class="details-img" src="./assets/star.svg" alt="rating">
+                <label for="rating"><mark><u><i>Rating:</i></u></mark></label>
+                <input type="range">
+            </div>
+        </details>
+        <button type="submit">Submit</button>
+    </form>
+      </fieldset>
+</body>
+
+</html>

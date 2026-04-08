@@ -1,0 +1,27 @@
+.container{
+    height: 500px;
+    width: 800px;
+    background-color: palevioletred;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.box{
+    height: 100px;
+    width: 100px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgb(138, 13, 13);
+    font-weight: bold;
+    color: white;
+    
+    
+}

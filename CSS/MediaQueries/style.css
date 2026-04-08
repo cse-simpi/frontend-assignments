@@ -1,0 +1,27 @@
+.container{
+    height: 500px;
+    width: 199vw;
+    background-color: aqua;
+}
+
+/* mobile */
+@media (max-width:767px){
+    .container{
+        background-color: green;
+    }
+}
+
+/* tablet */
+@media (min-width:768px) and (max-width:1023px){
+    .container{
+        background-color: pink;
+    }
+}
+
+/* pc */
+@media (min-width:1023px){
+
+    .container{
+        background-color: bisque;
+    }
+}

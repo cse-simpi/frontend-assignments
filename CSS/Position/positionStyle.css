@@ -1,0 +1,38 @@
+.container{
+    height: 400px;
+    width: 400px;
+    background-color: red;
+    /* top: 200px;
+    position: relative;
+    left: 200px;  */
+}
+
+.container2{
+    height: 200px;
+    width: 200px;
+    background-color:bisque;
+    position: relative;
+    left:200px;
+}
+.box{
+    height: 100px;
+    width: 100px;
+    background-color:aquamarine;
+    position: absolute;
+    top:300px;
+    left: 300px;
+}
+/* postion is bydfault static 
+absolute - acc to parent*/
+/* relative jahan pe hoga vhan se start krega */
+
+nav{
+    height: 60px;
+    width: 100vw;
+    background-color: rgb(20, 147, 147);
+    /* position: fixed; */
+    position: sticky;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+}
