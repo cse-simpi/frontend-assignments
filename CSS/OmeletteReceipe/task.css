@@ -1,0 +1,52 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: beige;
+}
+.container{
+    width: 800px;
+    margin: auto;
+    background-color: white;
+    border-radius: 5px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.image img{
+    border-radius: 20px;
+    margin: 30px;
+   
+}
+
+.intro {
+    margin: 30px;
+}
+
+.prep-time, .ingredients,.instructions, .nutrition{
+    
+    margin: 10px 30px;
+    padding: 20px;
+}
+
+.prep-time{
+    background-color: rgb(247, 237, 243);
+    width: 700px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.prep-time h2{
+    color: rgb(193, 61, 219);
+    margin-bottom: 10px;
+    
+}
+
+.ingredients h1, .instructions h1,.nutrition h1{
+    color: rgb(99, 88, 68);
+}

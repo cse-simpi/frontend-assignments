@@ -1,0 +1,16 @@
+.btn{
+    display: inline-block;
+    background-color: black;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    color: white;
+    box-shadow: 0 8px 15px  rgba(0,0,0,0.2);
+}
+
+.btn:hover{
+    cursor: pointer;
+    background-color: #403d3d;
+    transition: 0.3s;
+    transform: scale(1.2);
+}
