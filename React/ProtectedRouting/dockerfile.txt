@@ -1,0 +1,214 @@
+services:
+  # --- INFRASTRUCTURE LAYER ---
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=pharmacy_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+
+  # --- SPRING CLOUD LAYER ---
+  eureka-server:
+    build: ./EurekaServer
+    container_name: eureka-server
+    restart: always
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:8761/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  config-server:
+    build: ./ConfigServer
+    container_name: config-server
+    env_file: .env
+    ports:
+      - "8888:8888"
+    restart: on-failure
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=git
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/cse-simpi/online-pharmacy-and-medicine-delivery
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_SEARCH_PATHS=config-repo
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT_LABEL=master
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 1s bash -c ':> /dev/tcp/127.0.0.1/8888' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # --- MICROSERVICES LAYER ---
+  auth-service:
+    build: ./AuthService
+    container_name: auth-service
+    restart: on-failure
+    env_file: .env
+    ports:
+      - "8081:8081"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_ZIPKIN_BASE_URL=http://zipkin:9411
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRATION=${JWT_EXPIRATION}
+      - SPRINGDOC_SWAGGER_UI_ENABLED=true
+      - SPRINGDOC_API_DOCS_ENABLED=true
+      - SERVER_FORWARD_HEADERS_STRATEGY=framework
+
+  catalog-service:
+    build: ./CatalogService
+    container_name: catalog-service
+    restart: on-failure
+    env_file: .env
+    ports:
+      - "8082:8082"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_ZIPKIN_BASE_URL=http://zipkin:9411
+      - SPRINGDOC_SWAGGER_UI_ENABLED=true
+      - SPRINGDOC_API_DOCS_ENABLED=true
+      - SERVER_FORWARD_HEADERS_STRATEGY=framework
+
+  order-service:
+    build: ./OrderService
+    container_name: order-service
+    restart: on-failure
+    env_file: .env
+    ports:
+      - "8083:8083"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_ZIPKIN_BASE_URL=http://zipkin:9411
+      - SPRINGDOC_SWAGGER_UI_ENABLED=true
+      - SPRINGDOC_API_DOCS_ENABLED=true
+      - SERVER_FORWARD_HEADERS_STRATEGY=framework
+
+  notification-service:
+    build: ./NotificationService
+    container_name: notification-service
+    restart: on-failure
+    env_file: .env
+    ports:
+      - "8084:8084"
+    depends_on:
+      config-server:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_ZIPKIN_BASE_URL=http://zipkin:9411
+      - SPRINGDOC_SWAGGER_UI_ENABLED=true
+      - SPRINGDOC_API_DOCS_ENABLED=true
+      - SERVER_FORWARD_HEADERS_STRATEGY=framework
+
+  api-gateway:
+    build: ./ApiGateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    env_file: .env
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_ZIPKIN_BASE_URL=http://zipkin:9411
+      - JWT_SECRET=${JWT_SECRET}
+      - SPRINGDOC_SWAGGER_UI_ENABLED=true
+      - SPRINGDOC_API_DOCS_ENABLED=true
+
+  admin-service:
+    build: ./AdminService
+    container_name: admin-service
+    restart: on-failure
+    env_file: .env
+    ports:
+      - "8085:8085"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_ZIPKIN_BASE_URL=http://zipkin:9411
+      - JWT_SECRET=${JWT_SECRET}
+      - SPRINGDOC_SWAGGER_UI_ENABLED=true
+      - SPRINGDOC_API_DOCS_ENABLED=true
+      - SERVER_FORWARD_HEADERS_STRATEGY=framework
+
+# --- ROOT LEVEL VOLUME (External to the services block) ---
+volumes:
+  mysql_data:

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import User from './User'
 import UserDetails from './UserDetails'
 import Data from './Data'
+import Login from './Login'
 
 const App = () => {
   // const [state,setState] = useState(0)
@@ -36,7 +37,8 @@ const App = () => {
       <button onClick={reset}>Reset</button> */}
       {/* <User/> */}
       {/* <UserDetails/> */}
-      <Data/>
+      {/* <Data/> */}
+      <Login/>
     </div>
   )
 }
